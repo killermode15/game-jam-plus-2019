@@ -7,8 +7,8 @@ public class SkillData
 {
     public float Cooldown;
     public bool Used;
-    public GameObject skillHoldObject;
-    public GameObject skillUseObject;
+    public ParticleSystem skillHoldObject;
+    public ParticleSystem skillUseObject;
     public float skillDuration;
 
     //private void Update()

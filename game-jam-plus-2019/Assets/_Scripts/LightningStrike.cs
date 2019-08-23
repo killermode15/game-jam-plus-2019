@@ -3,45 +3,78 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using VRTK;
+using VRTK.Examples.Archery;
 
 public class LightningStrike : MonoBehaviour
 {
-    public VRTK_InteractGrab leftGrabControl, rightGrabControl;
-    public SkillData SkillData;
 
-    public UnityEvent OnSkillGrab;
-    public UnityEvent OnSkillUnGrab;
+
+
+    #region old code
+    //public SkillData SkillData;
+
+    public Transform skillHidingDock;
 
     private VRTK_InteractGrab grabControl;
-    private Transform clouds;
-    private GameObject skillGrabbed;
+    [SerializeField] private Transform clouds;
+    [SerializeField] private GameObject skillGrabbed;
+    [SerializeField] private GameObject skillUsed;
+
+    public UnityEvent OnSkillGrab;
+    public UnityEvent OnSkillUngrab;
+
+    private bool isSkillGrabbed;
 
     private void Update()
     {
-        if (grabControl.IsGrabButtonPressed())
+        if (grabControl != null)
         {
-            OnSkillGrab.Invoke();
-        }
-        else
-        {
-            OnSkillUnGrab.Invoke();
+            if (grabControl.IsGrabButtonPressed())
+            {
+                if (isSkillGrabbed) return;
+
+                isSkillGrabbed = true;
+                OnSkillGrab.Invoke();
+            }
+            else
+            {
+                if (!isSkillGrabbed) return;
+
+                OnSkillUngrab.Invoke();
+                isSkillGrabbed = false;
+            }
         }
     }
 
     public void PrepareSkill(GameObject _clouds, VRTK_InteractGrab control)
     {
+        Debug.Log(control);
+
         grabControl = control;
         clouds = _clouds.transform;
-        skillGrabbed = SkillData.skillUseObject;
-        skillGrabbed.SetActive(true);
+
+        //skillGrabbed = SkillData.skillUseObject;
         skillGrabbed.transform.parent = grabControl.transform;
-        skillGrabbed.transform.position = Vector3.zero;
+        skillGrabbed.transform.localPosition = Vector3.zero;
+        skillGrabbed.GetComponent<ParticleSystem>().Play();
     }
 
+    // Activate skill 
     public void UseSkill()
     {
-        Vector3 pos = new Vector3(grabControl.transform.position.x, clouds.position.y, grabControl.transform.position.z);
-        GameObject go = Instantiate(SkillData.skillUseObject, pos, Quaternion.identity);
-        Destroy(go, SkillData.skillDuration);
+        Vector3 pos = new Vector3(grabControl.transform.position.x, clouds.position.y - 15f, grabControl.transform.position.z);
+
+        //skillUsed = SkillData.skillUseObject;
+
+        skillUsed.transform.position = pos;
+        skillUsed.GetComponent<ParticleSystem>().Play();
     }
+
+    // Hide skill objects
+    public void DockSkill(Transform obj)
+    {
+        obj.position = skillHidingDock.position;
+        obj.GetComponent<ParticleSystem>().Stop();
+    }
+    #endregion
 }
