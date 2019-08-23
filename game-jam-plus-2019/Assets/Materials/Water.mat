@@ -29,14 +29,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Water:
         m_Texture: {fileID: 2800000, guid: 53d456aa79639214eb4947c8db072377, type: 3}
-        m_Scale: {x: 3, y: 3}
+        m_Scale: {x: 7.5, y: 7.5}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _DistortStrength: 0.99
     - _FoamWidth: 0.5
-    - _WaveAmount: 1.103
-    - _WaveHeight: 2
+    - _WaveAmount: 0.81
+    - _WaveHeight: 0.26
     - _WaveSpeed: 1.481
     m_Colors:
     - _FoamTint: {r: 0.59324825, g: 0.5586953, b: 0.764151, a: 1}
-    - _WaterTint: {r: 0.75, g: 0.88422155, b: 1, a: 1}
+    - _WaterTint: {r: 0.7479675, g: 0.88617885, b: 1, a: 1}
