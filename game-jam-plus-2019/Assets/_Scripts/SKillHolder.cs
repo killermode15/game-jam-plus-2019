@@ -4,7 +4,4 @@ using UnityEngine;
 
 public class SKillHolder : MonoBehaviour
 {
-    public Skill Skil;
-
-
 }
