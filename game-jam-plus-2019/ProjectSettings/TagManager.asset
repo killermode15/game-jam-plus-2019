@@ -17,6 +17,7 @@ TagManager:
   - Head
   - PlayerHand
   - Enemy
+  - Enemy Boat
   layers:
   - Default
   - TransparentFX

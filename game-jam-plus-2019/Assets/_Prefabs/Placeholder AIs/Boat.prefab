@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 596304480683993120}
   m_Layer: 0
   m_Name: Boat
-  m_TagString: Untagged
+  m_TagString: EnemyBoat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  enemyPrefab: {fileID: 4629787170952289382, guid: 9f450b924ff9d8b42ac143c6f3649838,
+  enemyPrefab: {fileID: 4629787170952289382, guid: f8f325f562b2b674fb6ef517dbad0d6e,
     type: 3}
 --- !u!65 &1368861397255705778
 BoxCollider:

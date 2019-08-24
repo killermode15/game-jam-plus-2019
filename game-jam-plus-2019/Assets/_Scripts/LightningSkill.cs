@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 using VRTK;
 using VRTK.Examples.Archery;
@@ -108,11 +109,27 @@ public class LightningSkill : MonoBehaviour
             areaHit = hit.point;
             Collider[] detected = Physics.OverlapSphere(areaHit, range, lightningMask);
 
+            for (int i = 0; i < detected.Length; i++)
+            {
+                Debug.Log(detected[i], detected[i]);
+            }
+
             foreach (Collider col in detected)
             {
                 if (col.CompareTag("Enemy"))
                 {
-                    col.GetComponent<AIBehaviour>().DestroyEnemy();
+                    col.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                    col.GetComponent<Rigidbody>().AddExplosionForce(25,areaHit,range,50, ForceMode.Impulse);
+                    col.GetComponent<AIBehaviour>().DestroyEnemy(2f);
+                    Destroy(col.GetComponent<NavMeshAgent>());
+                    Destroy(col.GetComponent<AIBehaviour>());
+                }
+                else if (col.CompareTag("EnemyBoat"))
+                {
+                    Destroy(col.GetComponent<BoatController>());
+                    col.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                    col.GetComponent<Rigidbody>().AddExplosionForce(25, areaHit, range, 50, ForceMode.Impulse);
+                    Destroy(col.gameObject,2f);
                 }
             }
         }

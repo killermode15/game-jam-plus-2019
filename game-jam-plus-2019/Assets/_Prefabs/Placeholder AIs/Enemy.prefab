@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -1935329088920902255}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: CHINGCHONG
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,6 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb22e7210f287bd4093a58873d16c170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDestroyEnemy: {fileID: 11400000, guid: 265542286e361184e9e220b726adf857, type: 2}
   CheckpointManager: {fileID: 0}
   agent: {fileID: 0}
   Flag: {fileID: 7834266328279543114, guid: 967d0ae2cc16dcd4c8f25079aae4f236, type: 3}
