@@ -68,6 +68,7 @@
 
         public ControllerInteractionEvent OnControllerVisible = new ControllerInteractionEvent();
         public ControllerInteractionEvent OnControllerHidden = new ControllerInteractionEvent();
+        
 
         protected override void AddListeners(VRTK_ControllerEvents component)
         {
