@@ -110,11 +110,9 @@ public class LightningSkill : MonoBehaviour
 
             foreach (Collider col in detected)
             {
-
-
-                if (col.CompareTag("CHINGCHONG"))
+                if (col.CompareTag("Enemy"))
                 {
-                    Destroy(col.gameObject);
+                    col.GetComponent<AIBehaviour>().DestroyEnemy();
                 }
             }
         }
