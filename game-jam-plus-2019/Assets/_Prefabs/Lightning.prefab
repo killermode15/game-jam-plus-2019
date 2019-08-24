@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8510412844482254576}
   - component: {fileID: 8510412844482254577}
   - component: {fileID: 8510412844482254590}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Lightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,6 +161,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bolt
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a9d5c68cac0a98249a213af6715292b4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a9d5c68cac0a98249a213af6715292b4,
         type: 3}

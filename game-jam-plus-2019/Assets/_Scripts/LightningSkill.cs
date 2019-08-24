@@ -11,6 +11,7 @@ public class LightningSkill : MonoBehaviour
     public LayerMask lightningMask;
     public GameObject lightningPrefab;
     public GameObject lightningFXPrefab;
+    public GameObject lightningHitFXtPrefab;
     public float spawnDelay = 1f;
     public float range;
 
@@ -105,9 +106,14 @@ public class LightningSkill : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, lightningMask, QueryTriggerInteraction.Ignore))
         {
+
             Debug.Log(hit.collider.gameObject.name);
             areaHit = hit.point;
             Collider[] detected = Physics.OverlapSphere(areaHit, range, lightningMask);
+
+            GameObject hitFx = Instantiate(lightningHitFXtPrefab, areaHit, Quaternion.identity);
+
+            Destroy(hitFx, 2);
 
             for (int i = 0; i < detected.Length; i++)
             {
