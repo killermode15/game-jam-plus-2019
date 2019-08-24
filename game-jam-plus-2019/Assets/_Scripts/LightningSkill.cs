@@ -7,8 +7,7 @@ using VRTK.Examples.Archery;
 
 public class LightningSkill : MonoBehaviour
 {
-    public LightningStrike LightningStrike;
-
+    public LayerMask lightningMask;
     public GameObject lightningPrefab;
     public GameObject lightningFXPrefab;
     public float spawnDelay = 1f;
@@ -20,6 +19,7 @@ public class LightningSkill : MonoBehaviour
     private bool isLightningGrabbed;
     private VRTK_InteractGrab lastGrabController;
     private GameObject spawnedLightning;
+    private Vector3 areaHit;
 
     public UnityEvent OnGrabRelease;
 
@@ -102,12 +102,16 @@ public class LightningSkill : MonoBehaviour
         Ray ray = new Ray(pos + new Vector3(0,20,0), Vector3.down);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 50f))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, lightningMask, QueryTriggerInteraction.Ignore))
         {
-            Collider[] detected = Physics.OverlapSphere(hit.point, range);
+            Debug.Log(hit.collider.gameObject.name);
+            areaHit = hit.point;
+            Collider[] detected = Physics.OverlapSphere(areaHit, range, lightningMask);
 
             foreach (Collider col in detected)
             {
+
+
                 if (col.CompareTag("CHINGCHONG"))
                 {
                     Destroy(col.gameObject);
@@ -116,4 +120,9 @@ public class LightningSkill : MonoBehaviour
         }
     }
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(areaHit, range);
+    }
 }
