@@ -110,7 +110,7 @@ MonoBehaviour:
   OnDestroyEnemy: {fileID: 0}
   CheckpointManager: {fileID: 0}
   agent: {fileID: 0}
-  Flag: {fileID: 7834266328279543114, guid: 967d0ae2cc16dcd4c8f25079aae4f236, type: 3}
+  Flag: {fileID: 5802377198327882058, guid: 695b25525ab0de54ca9c4d824e667ea9, type: 3}
   speed: 2.5
   boost: 0
 --- !u!54 &-2670579804450832426
