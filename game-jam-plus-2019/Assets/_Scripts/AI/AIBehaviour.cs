@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AIBehaviour : MonoBehaviour
 {
     public CheckpointManager CheckpointManager;
+    public NavMeshAgent agent;
     public GameObject Flag;
     public float speed;
     public float boost;
@@ -13,6 +15,7 @@ public class AIBehaviour : MonoBehaviour
 
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
         CheckpointManager = FindObjectOfType<CheckpointManager>();
         InvokeRepeating("GetTargetCheckpoint", 0, 0.5f);
     }
@@ -21,10 +24,12 @@ public class AIBehaviour : MonoBehaviour
     {
         if (target)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position,
-                (speed + boost) * Time.deltaTime);
+            agent.SetDestination(target.transform.position);
+            agent.speed = speed + boost;
+            //transform.position = Vector3.MoveTowards(transform.position, target.transform.position,
+            //    (speed + boost) * Time.deltaTime);
 
-            if (Vector3.Distance(transform.position, target.transform.position) < 0.1f)
+            if (Vector3.Distance(transform.position, target.transform.position) < agent.stoppingDistance)
             {
                 PlantFlag();
                 target = null;
