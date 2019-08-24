@@ -6,6 +6,7 @@ public class FlagCapture : MonoBehaviour
 {
     [SerializeField] private List<Transform> checkPoints;
     [SerializeField] private Material swapTextureMat;
+    [SerializeField] private Shader swapTexShader;
 
     [SerializeField] private bool updateDebug;
 
@@ -25,9 +26,9 @@ public class FlagCapture : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        List<Vector4> positions = new List<Vector4>(50);
+        swapTextureMat.SetVectorArray("_Position", new Vector4[50]);
+        Vector4[] positions = swapTextureMat.GetVectorArray("_Position");
         
-        for(int i = 0; i < 50; i ++) positions.Add(new Vector4());
 
         for (int i = 50 - checkPoints.Count - 1; i >= 0; i--)
         {
@@ -41,6 +42,8 @@ public class FlagCapture : MonoBehaviour
             positions[i] = checkPoints[i].position;
         }
 
+        positions[0] = transform.position;
+        
         swapTextureMat.SetVectorArray("_Position", positions);
     }
 }

@@ -53,10 +53,10 @@
 
             v2f vert (appdata v)
             {
-				for (int i = 0; i < 50; i++)
+				/*for (int i = 0; i < 50; i++)
 				{
 					_Position[i] = float3(-9999, -9999, -9999);
-				}
+				}*/
 
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
@@ -77,6 +77,13 @@
 				{
 					_Position[j] = float3(-9999, -9999, -9999);
 				}
+
+
+				_Position[0] = float3(131, 7.6, 1.5214);
+
+
+				_Position[1] = float3(4.3114, 7.6, 1.5214);
+
                 // sample the texture
 				float3 tex1 = tex2D(_MainTex, i.uv);
 				float3 tex2 = tex2D(_SwapTex, i.uv) * _SwapTint;

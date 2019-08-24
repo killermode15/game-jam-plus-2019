@@ -29,7 +29,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _LineWidth: 1
-    - _Radius: 8.7
+    - _Radius: 51.12
     m_Colors:
     - _SwapTint: {r: 1, g: 1, b: 1, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
