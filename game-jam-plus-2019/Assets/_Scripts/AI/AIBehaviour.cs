@@ -68,8 +68,9 @@ public class AIBehaviour : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void DestroyEnemy()
+    public void DestroyEnemy(float delay)
     {
+        Destroy(gameObject,delay);
         OnDestroyEnemy.Raise();
     }
 }
