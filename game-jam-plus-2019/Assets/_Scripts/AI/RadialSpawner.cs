@@ -5,7 +5,9 @@ using UnityEngine;
 public class RadialSpawner : MonoBehaviour
 {
     [Header("Spawner Properties")]
-    [SerializeField] private List<GameObject> SpawnPrefabs;
+    [SerializeField] private List<GameObject> spawnPrefabs;
+
+    [SerializeField] private Transform initialTarget;
     [SerializeField] private float radius;
 
     [Space(10)]
@@ -23,7 +25,10 @@ public class RadialSpawner : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            Spawn();
+        {
+            GameObject spawned =Spawn();
+            spawned.GetComponent<BoatController>().SetTarget(initialTarget);
+        }
     }
 
     Vector3 GetRandomPosition(float _radius, float height = 0)
@@ -34,13 +39,11 @@ public class RadialSpawner : MonoBehaviour
         float y = Mathf.Cos(angle) * radius;
 
         return new Vector3(x, height, y);
-
     }
 
-
-    void Spawn()
+    GameObject Spawn()
     {
-        GameObject GetRandomPrefab() => SpawnPrefabs.Count > 0 ? SpawnPrefabs[Random.Range(0, SpawnPrefabs.Count)] : null;
+        GameObject GetRandomPrefab() => spawnPrefabs.Count > 0 ? spawnPrefabs[Random.Range(0, spawnPrefabs.Count)] : null;
 
         GameObject prefab = GetRandomPrefab();
         GameObject instance = Instantiate(prefab);
@@ -49,6 +52,8 @@ public class RadialSpawner : MonoBehaviour
 
         instance.SetPosition(randomPos);
         instance.transform.parent = transform;
+
+        return instance;
     }
 
     private void OnDrawGizmosSelected()

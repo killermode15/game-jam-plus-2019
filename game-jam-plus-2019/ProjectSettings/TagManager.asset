@@ -17,6 +17,7 @@ TagManager:
   - Head
   - PlayerHand
   - CHINGCHONG
+  - BoatStop
   layers:
   - Default
   - TransparentFX

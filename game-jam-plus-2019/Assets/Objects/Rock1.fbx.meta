@@ -1,24 +1,14 @@
 fileFormatVersion: 2
-guid: 8281b51a019b87a47b0c203383078a53
+guid: 038d3a32df25c6745ba5613c061c0f89
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert4
-    second: {fileID: 2100000, guid: 046491017a589b940bc3b0e30e389d65, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pasted__Leaf
-    second: {fileID: 2100000, guid: 536eae5bb582ca7409349f3dd44ffd5b, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
-    materialName: 2
+    materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
