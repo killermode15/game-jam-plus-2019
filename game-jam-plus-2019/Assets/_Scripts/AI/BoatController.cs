@@ -25,11 +25,10 @@ public class BoatController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("BoatStop") || collision.collider.GetType() == typeof(TerrainCollider))
-        {
-            Debug.Log("Test");
-            Unload();
-        }
+        if (collision.collider.GetType() != typeof(TerrainCollider)) return;
+
+        Debug.Log("Test");
+        Unload();
     }
 
     private void Unload()

@@ -15,19 +15,51 @@ public class RadialSpawner : MonoBehaviour
     [SerializeField] private bool showDebug;
     [SerializeField] private Color radiusColor;
 
+    [SerializeField] private float time;
+    [SerializeField] private float spawnPercSec;
+    [SerializeField] private int boatLimit;
+
+    private List<GameObject> spawnedEnemies;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        spawnedEnemies = new List<GameObject>();
+        StartCoroutine(Spawn_C());
     }
 
     // Update is called once per frame
     void Update()
     {
+        spawnedEnemies.RemoveAll(x => x == null);
+
+        time += Time.deltaTime / 30;
+        time = Mathf.Clamp(time, 0, 1.3f);
+
+        spawnPercSec = Mathf.Pow((time + 5), 2 * time);
+        spawnPercSec = Mathf.Clamp(spawnPercSec, 5, 10);
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject spawned =Spawn();
+            GameObject spawned = Spawn();
             spawned.GetComponent<BoatController>().SetTarget(initialTarget);
+        }
+    }
+
+    IEnumerator Spawn_C()
+    {
+        while (true)
+        {
+            if (spawnedEnemies.Count < boatLimit)
+            {
+                yield return new WaitForSeconds(1);
+                for (int i = 0; i < Mathf.CeilToInt(spawnPercSec); i++)
+                {
+                    Spawn().GetComponent<BoatController>().SetTarget(initialTarget);
+                }
+            }
+
+            yield return new WaitForEndOfFrame();
         }
     }
 
@@ -52,6 +84,8 @@ public class RadialSpawner : MonoBehaviour
 
         instance.SetPosition(randomPos);
         instance.transform.parent = transform;
+
+        spawnedEnemies.Add(instance);
 
         return instance;
     }
