@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ScriptableEventSystem;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class AIBehaviour : MonoBehaviour
 {
+    public GameEvent OnDestroyEnemy;
     public CheckpointManager CheckpointManager;
     public NavMeshAgent agent;
     public GameObject Flag;
@@ -64,5 +66,10 @@ public class AIBehaviour : MonoBehaviour
         Instantiate(Flag, transform.position + transform.forward, Quaternion.identity);
         target.GetComponent<Checkpoint>().Capture();
         Destroy(gameObject);
+    }
+
+    public void DestroyEnemy()
+    {
+        OnDestroyEnemy.Raise();
     }
 }

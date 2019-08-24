@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -2670579804450832426}
   - component: {fileID: 5890079919170508209}
   m_Layer: 0
-  m_Name: CHING_N_CHONG
+  m_Name: EnemyAI
   m_TagString: CHINGCHONG
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

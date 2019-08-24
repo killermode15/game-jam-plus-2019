@@ -16,7 +16,7 @@ TagManager:
   - Torso
   - Head
   - PlayerHand
-  - CHINGCHONG
+  - Enemy
   layers:
   - Default
   - TransparentFX
