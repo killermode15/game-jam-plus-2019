@@ -41,11 +41,11 @@
 
             struct v2f
             {
-                UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
                 float2 uv : TEXCOORD0;
-				float4 screenPos : TEXCOORD1;
-				float4 worldPos : TEXCOORD2;
+                UNITY_FOG_COORDS(1)
+				float4 screenPos : TEXCOORD2;
+				float4 worldPos : TEXCOORD3;
             };
 
 			uniform sampler2D _CameraDepthTexture;
@@ -84,6 +84,7 @@
 				half4 foamLine = 1 - saturate(_FoamWidth * (depth - i.screenPos.w));
 
 				col += foamLine * _FoamTint;
+				UNITY_APPLY_FOG(i.fogCoord, col);
 
                 return col;
             }
