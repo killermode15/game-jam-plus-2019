@@ -48,6 +48,7 @@ public class RadialSpawner : MonoBehaviour
         Vector3 randomPos = GetRandomPosition(radius, transform.position.y);
 
         instance.SetPosition(randomPos);
+        instance.transform.parent = transform;
     }
 
     private void OnDrawGizmosSelected()
