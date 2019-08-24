@@ -775,6 +775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 176859919}
   - component: {fileID: 170101471}
+  - component: {fileID: 176967508}
   m_Layer: 0
   m_Name: Controller (left)
   m_TagString: PlayerHand
@@ -782,6 +783,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &176967508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176967507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32642724c1719444826991e4ff8fccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoStartSampling: 1
+  velocityAverageFrames: 5
+  angularVelocityAverageFrames: 10
 --- !u!1 &177163951
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,6 +881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 176918483}
   - component: {fileID: 170082825}
+  - component: {fileID: 177194358}
   m_Layer: 0
   m_Name: Controller (right)
   m_TagString: PlayerHand
@@ -872,6 +889,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &177194358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177194357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b32642724c1719444826991e4ff8fccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoStartSampling: 1
+  velocityAverageFrames: 5
+  angularVelocityAverageFrames: 10
 --- !u!1 &177196017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,7 +1395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 343295951}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 725590906}
@@ -2745,7 +2777,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725590902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 25, z: 0}
+  m_LocalPosition: {x: 0, y: 25.6, z: 0}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children:
   - {fileID: 343295952}
@@ -3516,6 +3548,27 @@ MonoBehaviour:
     position: {x: -0.0116, y: 0.0523, z: -0.0723}
     rotation: {x: 45, y: 0, z: 70}
     scale: {x: 1, y: 1, z: 1}
+--- !u!1 &858918190 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 204869072750536895, guid: e168f1b464e429347bde52fdf8639c45,
+    type: 3}
+  m_PrefabInstance: {fileID: 86275612}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &858918191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858918190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc1a85222dd92a944895093d0c944734, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftEstimator: {fileID: 0}
+  rightEstimator: {fileID: 0}
+  requiredSpeed: 0
 --- !u!1 &884171635
 GameObject:
   m_ObjectHideFlags: 0
@@ -6232,6 +6285,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1607112215}
+  - component: {fileID: 1607112216}
+  - component: {fileID: 1607112217}
+  - component: {fileID: 1607112218}
   m_Layer: 0
   m_Name: Ground-Earthquake
   m_TagString: Untagged
@@ -6254,6 +6310,51 @@ Transform:
   m_Father: {fileID: 899279566}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1607112216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607112214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc1a85222dd92a944895093d0c944734, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftEstimator: {fileID: 176967508}
+  rightEstimator: {fileID: 177194358}
+  requiredSpeed: 5
+--- !u!95 &1607112217
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607112214}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3946d07b6f36ff74abc42a7f688ff825, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!154 &1607112218
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607112214}
+  m_Material: {fileID: 0}
+  m_Enabled: 1
+  m_TerrainData: {fileID: 15600000, guid: 168021e7f0f29f6418e68c3ec96a4be0, type: 2}
+  m_EnableTreeColliders: 1
 --- !u!1 &1639199628
 GameObject:
   m_ObjectHideFlags: 0
