@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 798361502581967639}
   m_LocalRotation: {x: 0.50000006, y: -0.49999854, z: 0.5, w: 0.50000155}
-  m_LocalPosition: {x: 0.051448345, y: 10.819999, z: -0.42164612}
-  m_LocalScale: {x: 1.1501005, y: 1, z: 0.8750604}
+  m_LocalPosition: {x: 0.051448345, y: 10.819999, z: -7.944}
+  m_LocalScale: {x: 2.5, y: 1, z: 0.8750604}
   m_Children: []
   m_Father: {fileID: 5041152661412978489}
   m_RootOrder: 0
@@ -102,7 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5041152661412978489}
   m_Layer: 0
-  m_Name: Flag 1
+  m_Name: Flag Waving
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ Transform:
   m_GameObject: {fileID: 5802377198327882058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.7, y: 28.11, z: 8.35}
-  m_LocalScale: {x: 0.07765532, y: 0.07765532, z: 0.07765532}
+  m_LocalScale: {x: 0.07, y: 0.2, z: 0.07}
   m_Children:
   - {fileID: 7533913149336976616}
   - {fileID: 1472598905723479444}

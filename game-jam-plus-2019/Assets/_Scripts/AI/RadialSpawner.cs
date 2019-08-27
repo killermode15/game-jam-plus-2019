@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RadialSpawner : MonoBehaviour
@@ -15,35 +16,52 @@ public class RadialSpawner : MonoBehaviour
     [SerializeField] private bool showDebug;
     [SerializeField] private Color radiusColor;
 
-    [SerializeField] private float time;
-    [SerializeField] private float spawnPercSec;
+    private float time;
+    private float spawnPercSec;
+    private bool canSpawn;
     [SerializeField] private int boatLimit;
 
     private List<GameObject> spawnedEnemies;
+
+    public List<GameObject> walkingEnemies;
 
     // Start is called before the first frame update
     void Start()
     {
         spawnedEnemies = new List<GameObject>();
-        StartCoroutine(Spawn_C());
     }
 
     // Update is called once per frame
     void Update()
     {
-        spawnedEnemies.RemoveAll(x => x == null);
-
-        time += Time.deltaTime / 30;
-        time = Mathf.Clamp(time, 0, 1.3f);
-
-        spawnPercSec = Mathf.Pow((time + 5), 2 * time);
-        spawnPercSec = Mathf.Clamp(spawnPercSec, 5, 10);
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (canSpawn)
         {
-            GameObject spawned = Spawn();
-            spawned.GetComponent<BoatController>().SetTarget(initialTarget);
+            spawnedEnemies.RemoveAll(x => x == null);
+
+            time += Time.deltaTime / 30;
+            time = Mathf.Clamp(time, 0, 1.3f);
+
+            spawnPercSec = Mathf.Pow((time + 5), 2 * time);
+            spawnPercSec = Mathf.Clamp(spawnPercSec, 5, 10);
         }
+        else
+        {
+            time = spawnPercSec = 0;
+        }
+
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    GameObject spawned = Spawn();
+        //    spawned.GetComponent<BoatController>().SetTarget(initialTarget);
+        //}
+    }
+
+    public void StartSpawning()
+    {
+        if (canSpawn) return;
+
+        canSpawn = true;
+        StartCoroutine(Spawn_C());
     }
 
     IEnumerator Spawn_C()
@@ -97,5 +115,18 @@ public class RadialSpawner : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 
+    public void StopSpawn()
+    {
+        canSpawn = false;
+        StopAllCoroutines();
+    }
 
+    public void CleanUpScene()
+    {
+        List<GameObject> enemiesToClear = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+        List<GameObject> boatsToClear = GameObject.FindGameObjectsWithTag("Enemy").ToList();
+
+        enemiesToClear.ForEach(Destroy);
+        boatsToClear.ForEach(Destroy);
+    }
 }

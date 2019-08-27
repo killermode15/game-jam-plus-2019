@@ -5,9 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class BoatController : MonoBehaviour
 {
+    private RadialSpawner radialSpawner;
+
     [SerializeField] private float speed;
     [SerializeField] private GameObject enemyPrefab;
     private Transform target;
+
+    private void Start()
+    {
+        radialSpawner = GameObject.FindObjectOfType<RadialSpawner>();
+    }
 
     public void SetTarget(Transform _target)
     {
@@ -36,6 +43,7 @@ public class BoatController : MonoBehaviour
     {
         // Spawn person
         GameObject enemy = Instantiate(enemyPrefab, transform.position, transform.rotation);
+        radialSpawner.walkingEnemies.Add(enemy);
 
         Destroy(gameObject);
     }

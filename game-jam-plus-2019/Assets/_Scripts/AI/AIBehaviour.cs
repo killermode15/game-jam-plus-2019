@@ -63,7 +63,7 @@ public class AIBehaviour : MonoBehaviour
 
     private void PlantFlag()
     {
-        Instantiate(Flag, transform.position + transform.forward, Quaternion.identity);
+        Instantiate(Flag, transform.position + transform.forward, Quaternion.identity, target.transform);
         target.GetComponent<Checkpoint>().Capture();
         Destroy(gameObject);
     }

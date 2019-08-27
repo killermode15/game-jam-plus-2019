@@ -405,13 +405,13 @@ namespace VRTK
 
                 if (IsControllerLeftHand(controller))
                 {
-                    hapticsProceduralClipLeft.Reset();
+                    //hapticsProceduralClipLeft.StopSpawn();
                     hapticsProceduralClipLeft.WriteSample((byte)(strength * byte.MaxValue));
                     OVRHaptics.LeftChannel.Preempt(hapticsProceduralClipLeft);
                 }
                 else if (IsControllerRightHand(controller))
                 {
-                    hapticsProceduralClipRight.Reset();
+                    //hapticsProceduralClipRight.StopSpawn();
                     hapticsProceduralClipRight.WriteSample((byte)(strength * byte.MaxValue));
                     OVRHaptics.RightChannel.Preempt(hapticsProceduralClipRight);
                 }

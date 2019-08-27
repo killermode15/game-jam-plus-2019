@@ -100,7 +100,7 @@ namespace VRTK.GrabAttachMechanics
         public float rotationFriction = 1f;
         [Tooltip("The damper in which to slow the Interactable Object's rotation down when released to simulate continued momentum. The higher the number, the faster the Interactable Object will come to a complete stop on release.")]
         public float releaseDecelerationDamper = 1f;
-        [Tooltip("The speed in which the Interactable Object returns to it's origin rotation when released. If the `Reset To Orign On Release Speed` is `0f` then the rotation will not be reset.")]
+        [Tooltip("The speed in which the Interactable Object returns to it's origin rotation when released. If the `StopSpawn To Orign On Release Speed` is `0f` then the rotation will not be reset.")]
         public float resetToOrignOnReleaseSpeed = 0f;
 
         [Header("Rotation Limits")]
@@ -286,7 +286,7 @@ namespace VRTK.GrabAttachMechanics
         /// <summary>
         /// The ResetRotation method will rotate the Interactable Object back to the origin rotation.
         /// </summary>
-        /// <param name="ignoreTransition">If this is `true` then the `Reset To Origin On Release Speed` will be ignored and the reset will occur instantly.</param>
+        /// <param name="ignoreTransition">If this is `true` then the `StopSpawn To Origin On Release Speed` will be ignored and the reset will occur instantly.</param>
         public virtual void ResetRotation(bool ignoreTransition = false)
         {
             CancelDecelerateRotation();

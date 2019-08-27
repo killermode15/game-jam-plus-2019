@@ -53,7 +53,7 @@ namespace VRTK.GrabAttachMechanics
         public bool forceKinematicOnGrab = true;
         [Tooltip("The damper in which to slow the Interactable Object down when released to simulate continued momentum. The higher the number, the faster the Interactable Object will come to a complete stop on release.")]
         public float releaseDecelerationDamper = 5f;
-        [Tooltip("The speed in which the Interactable Object returns to it's origin position when released. If the `Reset To Orign On Release Speed` is `0f` then the position will not be reset.")]
+        [Tooltip("The speed in which the Interactable Object returns to it's origin position when released. If the `StopSpawn To Orign On Release Speed` is `0f` then the position will not be reset.")]
         public float resetToOrignOnReleaseSpeed = 0f;
 
         [Header("Position Limit Settings")]

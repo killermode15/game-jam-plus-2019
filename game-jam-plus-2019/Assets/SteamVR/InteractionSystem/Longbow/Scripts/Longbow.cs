@@ -136,7 +136,7 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		private void HandAttachedUpdate( Hand hand )
 		{
-			// Reset transform since we cheated it right after getting poses on previous frame
+			// StopSpawn transform since we cheated it right after getting poses on previous frame
 			transform.localPosition = Vector3.zero;
 			transform.localRotation = Quaternion.identity;
 

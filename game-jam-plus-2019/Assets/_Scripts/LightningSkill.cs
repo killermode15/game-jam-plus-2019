@@ -8,6 +8,7 @@ using VRTK.Examples.Archery;
 
 public class LightningSkill : MonoBehaviour
 {
+    public AudioManager audioManager;
     public LayerMask lightningMask;
     public GameObject lightningPrefab;
     public GameObject lightningFXPrefab;
@@ -36,8 +37,6 @@ public class LightningSkill : MonoBehaviour
 
         if (!lastGrabController) return;
 
-        Debug.Log("TEST");
-
         lastGrabController.GetGrabbedObject().transform.localPosition = Vector3.zero;
 
         if (!lastGrabController.GetComponent<VRTK_ControllerEvents>()
@@ -47,10 +46,10 @@ public class LightningSkill : MonoBehaviour
             isLightningGrabbed = false;
 
             OnGrabRelease.Invoke();
-            Debug.Log("RELEASED");
+
         }
     }
-    
+
     private void OnTriggerStay(Collider collider)
     {
         VRTK_InteractGrab grabbingController = (collider.gameObject.GetComponent<VRTK_InteractGrab>() ? collider.gameObject.GetComponent<VRTK_InteractGrab>() : collider.gameObject.GetComponentInParent<VRTK_InteractGrab>());
@@ -59,7 +58,7 @@ public class LightningSkill : MonoBehaviour
             lastGrabController = grabbingController;
             isLightningGrabbed = true;
             spawnedLightning = Instantiate(lightningPrefab);
-            
+
             spawnedLightning.name = "LightningBoltClone";
             //lightningPrefab.SetPosition(grabbingController.transform.position);
             grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(spawnedLightning);
@@ -101,41 +100,83 @@ public class LightningSkill : MonoBehaviour
         lightningFX.GetComponent<ParticleSystem>().Play();
         Destroy(lightningFX, 1);
 
-        Ray ray = new Ray(pos + new Vector3(0,20,0), Vector3.down);
+        Ray ray = new Ray(pos + new Vector3(0, 20, 0), Vector3.down);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, lightningMask, QueryTriggerInteraction.Ignore))
         {
 
-            Debug.Log(hit.collider.gameObject.name);
+            AudioSource source = audioManager.GetAudio("Lightning").PlayAudio(randomPitch: true);
+
+            Destroy(source, source.clip.length+1);
+
             areaHit = hit.point;
-            Collider[] detected = Physics.OverlapSphere(areaHit, range, lightningMask);
+            Collider[] detected = Physics.OverlapSphere(areaHit, range);//, lightningMask);
 
             GameObject hitFx = Instantiate(lightningHitFXtPrefab, areaHit, Quaternion.identity);
 
             Destroy(hitFx, 2);
 
-            for (int i = 0; i < detected.Length; i++)
-            {
-                Debug.Log(detected[i], detected[i]);
-            }
-
             foreach (Collider col in detected)
             {
+                Rigidbody rb = col.GetComponent<Rigidbody>();
+                NavMeshAgent agent = col.GetComponent<NavMeshAgent>();
+                Animator anim = col.GetComponent<Animator>();
+
                 if (col.CompareTag("Enemy"))
                 {
-                    col.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                    col.GetComponent<Rigidbody>().AddExplosionForce(25,areaHit,range,50, ForceMode.Impulse);
+                    #region Rigidbody version
+                    /*
+                    if (col.GetComponent<AIBehaviour>() != null)
+                    {
+                        col.GetComponent<AIBehaviour>().DestroyEnemy(2f);
+                        col.GetComponent<AIBehaviour>().enabled = false; //Destroy(col.GetComponent<AIBehaviour>());
+                    }
+
+                    if (agent != null)
+                    {   
+                        agent.speed = 0;
+                        
+                        agent.isStopped = true;
+                        agent.enabled = false;//Destroy(col.GetComponent<NavMeshAgent>());
+                    }
+                    
+                    rb.constraints = RigidbodyConstraints.None;
+                    rb.AddExplosionForce(100, areaHit, range, 100, ForceMode.VelocityChange);
+                    */
+                    #endregion
+
+                    #region Animation Version
+
+                    anim.SetBool("Kill", true);
                     col.GetComponent<AIBehaviour>().DestroyEnemy(2f);
-                    Destroy(col.GetComponent<NavMeshAgent>());
-                    Destroy(col.GetComponent<AIBehaviour>());
+
+                    #endregion
+
                 }
-                else if (col.CompareTag("EnemyBoat"))
+
+                if (col.CompareTag("EnemyBoat"))
                 {
-                    Destroy(col.GetComponent<BoatController>());
-                    col.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                    col.GetComponent<Rigidbody>().AddExplosionForce(25, areaHit, range, 50, ForceMode.Impulse);
-                    Destroy(col.gameObject,2f);
+                    #region Rigidbody Versoin
+
+                    //if(col.GetComponent<BoatController>())
+                    //    Destroy(col.GetComponent<BoatController>());
+
+                    //rb.constraints = RigidbodyConstraints.None;
+                    //rb.AddExplosionForce(100, areaHit, range, 100, ForceMode.VelocityChange);
+
+
+                    //Destroy(col.gameObject, 2f);
+
+                    #endregion
+
+                    #region Animation Version
+
+                    anim.SetBool("Kill", true);
+                    Destroy(col.gameObject, 2f);
+
+                    #endregion
+
                 }
             }
         }

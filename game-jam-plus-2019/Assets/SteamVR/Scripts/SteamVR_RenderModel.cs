@@ -543,7 +543,7 @@ public class SteamVR_RenderModel : MonoBehaviour
 				attach.gameObject.layer = gameObject.layer;
 			}
 
-			// Reset transform.
+			// StopSpawn transform.
 			t.localPosition = Vector3.zero;
 			t.localRotation = Quaternion.identity;
 			t.localScale = Vector3.one;

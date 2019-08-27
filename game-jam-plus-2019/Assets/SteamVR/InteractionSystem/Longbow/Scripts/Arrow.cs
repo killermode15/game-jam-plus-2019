@@ -110,7 +110,7 @@ namespace Valve.VR.InteractionSystem
 
 				if ( travelledFrames < 2 && !canStick )
 				{
-					// Reset transform but halve your velocity
+					// StopSpawn transform but halve your velocity
 					transform.position = prevPosition - prevVelocity * Time.deltaTime;
 					transform.rotation = prevRotation;
 

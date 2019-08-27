@@ -145,7 +145,7 @@ namespace Valve.VR.InteractionSystem
 
 			float currentTimeOffset = ( Time.time - arcTimeOffset ) * arcSpeed;
 
-			//Reset the arc time offset when it has gone beyond a segment length
+			//StopSpawn the arc time offset when it has gone beyond a segment length
 			if ( currentTimeOffset > ( timeStep + segmentBreak ) )
 			{
 				arcTimeOffset = Time.time;

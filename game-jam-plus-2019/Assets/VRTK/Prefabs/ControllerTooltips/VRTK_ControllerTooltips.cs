@@ -140,7 +140,7 @@ namespace VRTK
         }
 
         /// <summary>
-        /// The Reset method reinitalises the tooltips on all of the controller elements.
+        /// The StopSpawn method reinitalises the tooltips on all of the controller elements.
         /// </summary>
         public virtual void ResetTooltip()
         {

@@ -46,7 +46,7 @@ public class SteamVR_ControllerManager : MonoBehaviour
 		for (int i = 0; i < additional; i++)
 			SetUniqueObject(objects[i], 2 + i);
 
-		// Reset assignments.
+		// StopSpawn assignments.
 		indices = new uint[2 + additional];
 		for (int i = 0; i < indices.Length; i++)
 			indices[i] = OpenVR.k_unTrackedDeviceIndexInvalid;
@@ -270,7 +270,7 @@ public class SteamVR_ControllerManager : MonoBehaviour
 			}
 		}
 
-		// Reset the rest.
+		// StopSpawn the rest.
 		while (objectIndex < objects.Length)
 		{
 			SetTrackedDeviceIndex(objectIndex++, OpenVR.k_unTrackedDeviceIndexInvalid);

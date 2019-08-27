@@ -18,4 +18,13 @@ public class CheckpointManager : MonoBehaviour
 
         return uncapturedCheckpoints;
     }
+
+    public void Restart()
+    {
+        foreach (Checkpoint checkpoint in Checkpoints)
+        {
+            checkpoint.IsCaptured = false;
+            Destroy(checkpoint.transform.Find("Flag Waving(Clone)").gameObject);
+        }
+    }
 }

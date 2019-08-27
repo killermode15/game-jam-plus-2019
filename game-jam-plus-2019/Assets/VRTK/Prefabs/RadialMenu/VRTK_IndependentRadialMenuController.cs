@@ -72,7 +72,7 @@ namespace VRTK
 
                 Destroy(menuCollider);
 
-                // Reset to initial state
+                // StopSpawn to initial state
                 Initialize();
             }
         }
@@ -86,7 +86,7 @@ namespace VRTK
                 return; // If all goes well in updateEventsManager, it will then call Initialize again, skipping this if statement
             }
 
-            // Reset variables
+            // StopSpawn variables
             interactingObjects.Clear();
             collidingObjects.Clear();
             if (delayedSetColliderEnabledRoutine != null)

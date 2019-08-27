@@ -36,7 +36,7 @@
         public bool showControlHints = true;
         [Tooltip("Hide hands when disabling them.")]
         public bool hideHandsAtSwitch = false;
-        [Tooltip("Reset hand position and rotation when enabling them.")]
+        [Tooltip("StopSpawn hand position and rotation when enabling them.")]
         public bool resetHandsAtSwitch = true;
         [Tooltip("Displays an axis helper to show which axis the hands will be moved through.")]
         public bool showHandAxisHelpers = true;
